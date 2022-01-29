@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://welt/insel8.tscn" type="PackedScene" id=3]
+[ext_resource path="res://welt/insel4.tscn" type="PackedScene" id=4]
+[ext_resource path="res://welt/insel1.tscn" type="PackedScene" id=5]
+[ext_resource path="res://welt/insel6.tscn" type="PackedScene" id=6]
+[ext_resource path="res://welt/insel7.tscn" type="PackedScene" id=7]
+[ext_resource path="res://welt/insel5.tscn" type="PackedScene" id=8]
+[ext_resource path="res://welt/insel2.tscn" type="PackedScene" id=9]
+[ext_resource path="res://welt/insel3.tscn" type="PackedScene" id=10]
+
+[node name="Inseln" type="Node2D"]
+
+[node name="inselgruppe" type="Node2D" parent="."]
+
+[node name="Insel1" parent="inselgruppe" instance=ExtResource( 5 )]
+position = Vector2( 4274, 2395 )
+
+[node name="Insel2" parent="inselgruppe" instance=ExtResource( 9 )]
+position = Vector2( 6177, -4254 )
+
+[node name="Insel3" parent="inselgruppe" instance=ExtResource( 10 )]
+position = Vector2( -7987, -6540 )
+
+[node name="Insel4" parent="inselgruppe" instance=ExtResource( 4 )]
+position = Vector2( -3870, -9187 )
+
+[node name="Insel5" parent="inselgruppe" instance=ExtResource( 8 )]
+position = Vector2( 883, -10114 )
+
+[node name="Insel6" parent="inselgruppe" instance=ExtResource( 6 )]
+position = Vector2( -5770, -1448 )
+
+[node name="Insel7" parent="inselgruppe" instance=ExtResource( 7 )]
+position = Vector2( -9571, -1516 )
+
+[node name="Insel8" parent="inselgruppe" instance=ExtResource( 3 )]
+position = Vector2( -6381, 7263 )
