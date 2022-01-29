@@ -1,0 +1,8 @@
+extends Node
+
+signal neu_ruder(wert)
+signal neu_segel(wert)
+
+var windrichtung:float = 0
+var windstaerke:int = 10
+var kraft_auf_segel:float = 0
