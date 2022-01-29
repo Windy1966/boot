@@ -16,11 +16,11 @@ position = Vector2( -2000, 547 )
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -2000, 544 )
 current = true
-zoom = Vector2( 10, 10 )
+zoom = Vector2( 5, 5 )
 
 [node name="HUD" parent="Camera2D" instance=ExtResource( 1 )]
-margin_left = -3332.0
-margin_top = -3055.0
-margin_right = -3332.0
-margin_bottom = -3055.0
-rect_scale = Vector2( 10, 10 )
+margin_left = 22.9998
+margin_top = -12.0002
+margin_right = 22.9998
+margin_bottom = -12.0002
+rect_scale = Vector2( 5, 5 )
