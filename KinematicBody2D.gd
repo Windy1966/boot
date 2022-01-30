@@ -3,15 +3,15 @@ extends KinematicBody2D
 var z_ruder:Node
 var z_mast:Node
 var z_boot_PhysicBody:Node
-var z_prozessbar
-var rotgew:float = 2
 var lokal_windrichtung:float=0
 var differenz:float = 0
 var seil:float = 1
 var kraft_auf_segel:float = 0
 var geschw:float = 0
 var segel_drehung_uhrz:bool = false
-var fahrt_richtung:float = 0
+var div:float = 0
+var schaden:float = 0
+var drehung:float = 0
 
 func _ready():
 	Global.connect("neu_segel", self, "fn_neu_segel")
@@ -37,6 +37,10 @@ func _physics_process(delta):
 	differenz = lokal_windrichtung - Global.windrichtung - PI
 	if abs(differenz) < seil:								# Wind von vorne Segel gleich Wind
 		z_mast.rotate((differenz *-1) - z_mast.rotation)
+		# Wenn keine Kraft in Fahrtrichtung
+		######################################
+
+		######################################
 	elif differenz > seil and differenz < (PI-seil):		# Wind links und Segel im Wind
 		z_mast.rotation = seil *-1
 		segel_drehung_uhrz = false
@@ -50,16 +54,36 @@ func _physics_process(delta):
 		else:
 			z_mast.rotation = seil *-1
 			segel_drehung_uhrz = false
-	Global.kraft_auf_segel = abs(sin(rotation + z_mast.rotation - Global.windrichtung)) * Global.windstaerke * abs(z_mast.rotation)
-	var div:float = 0 
-	if Global.kraft_auf_segel > geschw:
-		div = Global.kraft_auf_segel - geschw
-		geschw += div / 100
-	if Global.kraft_auf_segel < geschw:
-		div = geschw - Global.kraft_auf_segel
-		geschw -= div / 400
-	var drehung:float = z_ruder.rotation * -geschw / 1000
-	var velocity = Vector2(geschw * 5,0)
-	velocity = velocity.rotated(rotation)
-	move_and_slide(velocity)
+	# Kraft auf Segel 0 - 10
+	# Windrichtung im 90° zur Segelfläche = 100%
+	Global.kraft_auf_segel = abs(sin(rotation + z_mast.rotation - Global.windrichtung)) * Global.windstaerke
+	# Kraft auf Segel im 90° zur Fahrtrichtung = 100%
+	Global.kraft_in_fahrtrichtung = Global.kraft_auf_segel * abs(sin(z_mast.rotation))
+	if Global.kraft_in_fahrtrichtung > Global.geschwindigkeit:
+		div = Global.kraft_in_fahrtrichtung - Global.geschwindigkeit
+		Global.geschwindigkeit += div / 100
+	if Global.kraft_in_fahrtrichtung < Global.geschwindigkeit:
+		div = Global.geschwindigkeit - Global.kraft_in_fahrtrichtung
+		Global.geschwindigkeit -= div / 400
+	if Global.geschwindigkeit < 0.5:
+		$Icon.visible = true
+		drehung = z_ruder.rotation / -400
+	else:
+		$Icon.visible = false
+		drehung = z_ruder.rotation * -Global.geschwindigkeit / 1000
 	rotate(drehung)
+	var velocity = Vector2(Global.geschwindigkeit * 20,0)
+	velocity = velocity.rotated(rotation)
+	var konflikt = move_and_collide(velocity * delta)
+	if konflikt:
+		kollision(konflikt)
+
+func kollision(obj:KinematicCollision2D):
+	drehung = z_ruder.rotation / -100
+	rotate(drehung)
+	if Global.geschwindigkeit > 2:
+		schaden += Global.geschwindigkeit
+		print(schaden)
+		var objekt = obj.collider
+		#print(objekt.name)
+	Global.geschwindigkeit = 0

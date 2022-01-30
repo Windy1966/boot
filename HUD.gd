@@ -7,4 +7,6 @@ func _on_VScrollBar_value_changed(value):
 	Global.emit_signal("neu_segel", 11 - value)
 
 func _process(delta):
-	$ProgressBar.value = Global.kraft_auf_segel
+	$PBarKraftAufSegel.value = Global.kraft_auf_segel
+	$PBarKraftInFahrtrichtung.value = Global.kraft_in_fahrtrichtung
+	$PBarGeschwindigkeit.value = Global.geschwindigkeit
