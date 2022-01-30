@@ -13,6 +13,7 @@ var z_hud:Control
 var bootBody: KinematicBody2D
 var cam: Camera2D
 var zoom:int = 1
+var maus_vec:Vector2
 
 func _ready():
 	z_windrichtung = get_node("Camera2D/HUD/Sp_Windrichtung")
@@ -20,12 +21,13 @@ func _ready():
 	z_vscrollbar = get_node("Camera2D/HUD/VScrollBar")
 	z_Kamera = get_node("Camera2D")
 	z_hud = get_node("Camera2D/HUD")
-	
 	bootBody = get_node("Boot/KinematicBody2D")
 
 
 func _process(delta):
 	z_Kamera.global_position = bootBody.global_position
+	if Input.is_mouse_button_pressed(2):
+		print(maus_vec)
 	pass
 
 func set_windrichtung():
@@ -45,15 +47,19 @@ func _input(event):
 		set_windrichtung()
 	if event.is_action_pressed("links",true):
 		z_hscrollbar.value -= 0.05
-		print("Aktion links")
+		#print("Aktion links")
 	if event.is_action_pressed("oben"):
-		print("Aktion oben")
+		pass
+		#print("Aktion oben")
 	if event.is_action_pressed("rechts",true):
 		z_hscrollbar.value += 0.05
-		print("Aktion rechts")
+		#print("Aktion rechts")
 	if event.is_action_pressed("unten"):
-		print("Aktion unten")
+		pass
+		#print("Aktion unten")
 	if event is InputEventMouse:
+		if event.button_mask == 2:
+			get_viewport().warp_mouse(Vector2(100,100))
 		if event.button_mask == 8:
 			zoom += 1
 			zoom = clamp(zoom, 2, 15)
@@ -64,4 +70,5 @@ func _input(event):
 			zoom = clamp(zoom, 2, 15)
 			z_Kamera.set_zoom(Vector2(zoom,zoom))
 			z_hud.set_scale(Vector2(zoom,zoom))
-		print(zoom)
+	if event is InputEventMouseMotion:
+		maus_vec = event.relative

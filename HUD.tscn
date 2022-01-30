@@ -40,7 +40,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="PBarKraftAufSegel" type="ProgressBar" parent="."]
 margin_left = -486.0
 margin_top = -179.0
 margin_right = -397.0
@@ -48,6 +48,32 @@ margin_bottom = -165.0
 rect_rotation = -90.0
 max_value = 10.0
 value = 10.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PBarKraftInFahrtrichtung" type="ProgressBar" parent="."]
+margin_left = -470.0
+margin_top = -179.0
+margin_right = -381.0
+margin_bottom = -165.0
+rect_rotation = -90.0
+max_value = 10.0
+value = 8.89
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PBarGeschwindigkeit" type="ProgressBar" parent="."]
+margin_left = -453.0
+margin_top = -179.0
+margin_right = -364.0
+margin_bottom = -165.0
+rect_rotation = -90.0
+max_value = 10.0
+value = 8.89
 percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false

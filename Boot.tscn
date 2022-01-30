@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://bilder/ruder.png" type="Texture" id=1]
 [ext_resource path="res://bilder/segel.png" type="Texture" id=2]
 [ext_resource path="res://bilder/boot.png" type="Texture" id=3]
 [ext_resource path="res://KinematicBody2D.gd" type="Script" id=4]
+[ext_resource path="res://icon.png" type="Texture" id=5]
 
 [node name="Boot" type="Node2D"]
 
@@ -26,3 +27,8 @@ offset = Vector2( -16.614, 0 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KinematicBody2D"]
 visible = false
 polygon = PoolVector2Array( -162, -66, -162, 69, 25, 69, 85, 48, 164, 2, 79, -49, 22, -68 )
+
+[node name="Icon" type="Sprite" parent="KinematicBody2D"]
+visible = false
+position = Vector2( 237, 2 )
+texture = ExtResource( 5 )
