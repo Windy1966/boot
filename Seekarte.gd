@@ -18,8 +18,11 @@ var old_maus_pos:Vector2
 var mittelpunkt:Vector2
 var hscroll_bereich_halbe:float
 var vscroll_bereich_halbe:float
+var hscroll_multi:float
+var vscroll_multi:float
 
 func _ready():
+	print(get_viewport_rect().size)
 	z_windrichtung = get_node("Camera2D/HUD/Sp_Windrichtung")
 	z_hscrollbar = get_node("Camera2D/HUD/HScrollBar")
 	z_vscrollbar = get_node("Camera2D/HUD/VScrollBar")
@@ -50,16 +53,19 @@ func steuerung_aktiv():
 		# setze Mauszeiger in die mitte des Fensters
 		################## mauszeiger auf werte der beiden Potis setzen
 		var dummi:Vector2
-		dummi.x = z_hscrollbar.value
-		printt(z_hscrollbar.value, hscroll_bereich_halbe, mittelpunkt.x)
-		get_viewport().warp_mouse(mittelpunkt)
+		vscroll_multi = (get_viewport_rect().size.y) / (z_vscrollbar.max_value - z_vscrollbar.min_value)
+		dummi.y = (z_vscrollbar.value - z_vscrollbar.min_value) * vscroll_multi
+		hscroll_multi = get_viewport_rect().size.x / (z_hscrollbar.max_value - z_hscrollbar.min_value)
+		dummi.x = (z_hscrollbar.value - z_hscrollbar.min_value) * hscroll_multi
+		get_viewport().warp_mouse(dummi)
+		print(vscroll_multi)
 		# Mauszeiger unsichtbar machen
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func steuerung_deaktiv():
 	maus_sichtbar = true
 	get_viewport().warp_mouse(Vector2(old_maus_pos))
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _input(event):
 	if event.is_action_pressed("test_wind_plus",true):
