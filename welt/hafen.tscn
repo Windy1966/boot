@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://welt/img/hafen_tile.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 53, 269.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 272.5, 51 )
+
+[node name="Hafen" type="Node2D"]
+
+[node name="Steg1" type="Line2D" parent="."]
+position = Vector2( -102, 225 )
+points = PoolVector2Array( 264, -475, 260, 68 )
+width = 128.0
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 1 )
+texture_mode = 1
+
+[node name="Steg2" type="Line2D" parent="."]
+position = Vector2( -89, 136 )
+points = PoolVector2Array( -167, -437, 375, -435 )
+width = 128.0
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 1 )
+texture_mode = 1
+
+[node name="Static" type="StaticBody2D" parent="."]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Static"]
+position = Vector2( 159, 22.5 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Static"]
+position = Vector2( 15.5, -299 )
+shape = SubResource( 2 )
