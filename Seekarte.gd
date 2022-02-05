@@ -53,12 +53,11 @@ func steuerung_aktiv():
 		# setze Mauszeiger in die mitte des Fensters
 		################## mauszeiger auf werte der beiden Potis setzen
 		var dummi:Vector2
-		vscroll_multi = (get_viewport_rect().size.y) / (z_vscrollbar.max_value - z_vscrollbar.min_value)
-		dummi.y = (z_vscrollbar.value - z_vscrollbar.min_value) * vscroll_multi
+		vscroll_multi = (get_viewport_rect().size.y) / (z_vscrollbar.max_value - z_vscrollbar.min_value + 1)
+		dummi.y = ((z_vscrollbar.value - z_vscrollbar.min_value + 1) * vscroll_multi) - mittelpunkt.y
 		hscroll_multi = get_viewport_rect().size.x / (z_hscrollbar.max_value - z_hscrollbar.min_value)
 		dummi.x = (z_hscrollbar.value - z_hscrollbar.min_value) * hscroll_multi
 		get_viewport().warp_mouse(dummi)
-		print(vscroll_multi)
 		# Mauszeiger unsichtbar machen
 		#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
@@ -107,4 +106,17 @@ func _input(event):
 	if event is InputEventMouseMotion and maus_sichtbar == false:
 		var dummi = ((event.position - mittelpunkt) / mittelpunkt)
 		z_hscrollbar.value = dummi.x * hscroll_bereich_halbe
-		z_vscrollbar.value = (dummi.y * vscroll_bereich_halbe) + vscroll_bereich_halbe
+		z_vscrollbar.value = (dummi.y + mittelpunkt.y) * vscroll_bereich_halbe
+	print(event.position)
+	print(get_viewport().get_mouse_position())
+	print("-")
+
+func _notification(what):
+	match what:
+		NOTIFICATION_WM_MOUSE_EXIT:
+			if maus_sichtbar == false:
+				steuerung_deaktiv()
+			print("Maus im Fenster")
+		NOTIFICATION_WM_MOUSE_ENTER:
+
+			print("Maus ausserhalb des Fensters")
