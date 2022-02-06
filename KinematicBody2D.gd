@@ -6,6 +6,7 @@ var z_boot_PhysicBody:Node
 var lokal_windrichtung:float=0
 var differenz:float = 0
 var seil:float = 1
+var segel:float = 1
 var kraft_auf_segel:float = 0
 var geschw:float = 0
 var segel_drehung_uhrz:bool = false
@@ -27,7 +28,7 @@ func fn_neu_seil(wert):
 	seil = wert / 10
 
 func fn_neu_segel(wert):
-	print(wert)
+	segel = wert
 
 func _physics_process(delta):
 	if rotation > PI:					# bogenmaß im Bereich 2*PI halten
@@ -62,13 +63,13 @@ func _physics_process(delta):
 	# Windrichtung im 90° zur Segelfläche = 100%
 	Global.kraft_auf_segel = abs(sin(rotation + z_mast.rotation - Global.windrichtung)) * Global.windstaerke
 	# Kraft auf Segel im 90° zur Fahrtrichtung = 100%
-	Global.kraft_in_fahrtrichtung = Global.kraft_auf_segel * abs(sin(z_mast.rotation))
+	Global.kraft_in_fahrtrichtung = Global.kraft_auf_segel * abs(sin(z_mast.rotation)) * segel
 	if Global.kraft_in_fahrtrichtung > Global.geschwindigkeit:
 		div = Global.kraft_in_fahrtrichtung - Global.geschwindigkeit
-		Global.geschwindigkeit += div / 100
+		Global.geschwindigkeit += div / 200
 	if Global.kraft_in_fahrtrichtung < Global.geschwindigkeit:
 		div = Global.geschwindigkeit - Global.kraft_in_fahrtrichtung
-		Global.geschwindigkeit -= div / 400
+		Global.geschwindigkeit -= div / 500
 	if Global.geschwindigkeit < 0.5:
 		$Icon.visible = true
 		drehung = z_ruder.rotation / -400
