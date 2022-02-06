@@ -17,7 +17,7 @@ __meta__ = {
 position = Vector2( -337, -193 )
 texture = ExtResource( 1 )
 
-[node name="HScrollBar" type="HScrollBar" parent="."]
+[node name="HSBRuder" type="HScrollBar" parent="."]
 margin_left = -67.0
 margin_top = 250.0
 margin_right = 85.0
@@ -28,13 +28,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VScrollBar" type="VScrollBar" parent="."]
+[node name="VSBSeil" type="VScrollBar" parent="."]
 margin_left = 1.0
 margin_top = 136.0
 margin_right = 13.0
 margin_bottom = 198.0
 min_value = 1.0
 max_value = 10.0
+value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSBSegel" type="VScrollBar" parent="."]
+margin_left = 109.0
+margin_top = 137.0
+margin_right = 121.0
+margin_bottom = 261.0
+max_value = 1.0
 value = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -79,5 +90,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="value_changed" from="HScrollBar" to="." method="_on_HScrollBar_value_changed"]
-[connection signal="value_changed" from="VScrollBar" to="." method="_on_VScrollBar_value_changed"]
+[connection signal="value_changed" from="HSBRuder" to="." method="_on_HSBRuder_value_changed"]
+[connection signal="value_changed" from="VSBSeil" to="." method="_on_VSBSeil_value_changed"]
+[connection signal="value_changed" from="VSBSegel" to="." method="_on_VSBSegel_value_changed"]

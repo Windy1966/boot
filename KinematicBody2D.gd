@@ -14,16 +14,20 @@ var schaden:float = 0
 var drehung:float = 0
 
 func _ready():
+	Global.connect("neu_seil", self, "fn_neu_seil")
 	Global.connect("neu_segel", self, "fn_neu_segel")
 	Global.connect("neu_ruder", self, "fn_neu_ruder")
 	z_ruder = get_node("Sp_Ruder")
-	z_mast = get_node("Sp_Segel")
+	z_mast = get_node("Sp_Mast")
 	
 func fn_neu_ruder(wert):
 	z_ruder.rotation = wert
 
-func fn_neu_segel(wert):
+func fn_neu_seil(wert):
 	seil = wert / 10
+
+func fn_neu_segel(wert):
+	print(wert)
 
 func _physics_process(delta):
 	if rotation > PI:					# bogenmaß im Bereich 2*PI halten

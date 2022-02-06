@@ -5,7 +5,8 @@ var vorbelegung = {
 	"oben" : KEY_W,
 	"rechts" : KEY_D,
 	"unten" : KEY_S,
-	"steuerung" : KEY_Q,
+	"steuerung_a" : KEY_Q,
+	"steuerung_b" : KEY_E,
 	"test_wind_plus" : KEY_P,
 	"test_wind_minus" : KEY_O
 	}
