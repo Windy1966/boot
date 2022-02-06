@@ -5,12 +5,14 @@ var vorbelegung = {
 	"oben" : KEY_W,
 	"rechts" : KEY_D,
 	"unten" : KEY_S,
+	"steuerung" : KEY_Q,
 	"test_wind_plus" : KEY_P,
 	"test_wind_minus" : KEY_O
 	}
 
 func _ready():
 	initKeymap(vorbelegung)
+	#OS.window_fullscreen = true
 
 func initKeymap(keymap:Dictionary):
 	for action in keymap:

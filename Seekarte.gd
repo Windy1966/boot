@@ -59,22 +59,26 @@ func steuerung_deaktiv():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _input(event):
-	if event.is_action_pressed("test_wind_plus",true):
+	if event.is_action("test_wind_plus"):
 		windrichtung = z_windrichtung.rotation + EinGrad
 		set_windrichtung()
-	if event.is_action_pressed("test_wind_minus",true):
+	if event.is_action("test_wind_minus"):
 		windrichtung = z_windrichtung.rotation - EinGrad
 		set_windrichtung()
-	if event.is_action_pressed("links",true):
+	if event.is_action("links"):
 		z_sb_ruder.value -= 0.05
 	if event.is_action_pressed("oben"):
 		pass
 		#print("Aktion oben")
-	if event.is_action_pressed("rechts",true):
+	if event.is_action("rechts"):
 		z_sb_ruder.value += 0.05
 	if event.is_action_pressed("unten"):
 		pass
 		#print("Aktion unten")
+	if event.is_action_pressed("steuerung"):
+		steuerung_aktiv()
+	if event.is_action_released("steuerung"):
+		steuerung_deaktiv()
 	if event is InputEventMouse:
 		if event.button_mask == 8:
 			zoom += 1
@@ -86,18 +90,31 @@ func _input(event):
 			zoom = clamp(zoom, 2, 15)
 			z_Kamera.set_zoom(Vector2(zoom,zoom))
 			z_hud.set_scale(Vector2(zoom,zoom))
-	if event is InputEventMouseButton:
-		if event.button_index ==  BUTTON_RIGHT:
-			# dies event wird zweimal aufgerufen,
-			# einmal beim drücken, hierbei ist pressed = true
-			# und ein zweitesmal beim loslassen, hierbei ist pressed = false
-			if event.pressed:
-				steuerung_aktiv()
-			else:
-				steuerung_deaktiv()
+#	if event is InputEventMouseButton:
+#		if event.button_index ==  BUTTON_RIGHT:
+#			# dies event wird zweimal aufgerufen,
+#			# einmal beim drücken, hierbei ist pressed = true
+#			# und ein zweitesmal beim loslassen, hierbei ist pressed = false
+#			if event.pressed:
+#				steuerung_aktiv()
+#			else:
+#				steuerung_deaktiv()
 	if event is InputEventMouseMotion and maus_sichtbar == false:
 		var x = clamp(get_viewport().get_mouse_position().x, 0, get_viewport_rect().size.x)
 		var y = clamp(get_viewport().get_mouse_position().y, 0, get_viewport_rect().size.y)
 		proz_fenster = get_viewport_rect().size / 100 # größe vom fenster kann sich ändern
 		z_sb_segel.value = z_sb_segel.min_value + (y / proz_fenster.y) * proz_segel
 		z_sb_ruder.value = z_sb_ruder.min_value + (x / proz_fenster.x) * proz_ruder
+
+#func _notification(what):
+#	print(what)
+#	match what:
+#		NOTIFICATION_WM_MOUSE_EXIT:
+#			print("Maus ausserhalb des Fensters")
+#			#maus_sichtbar = true
+#			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+#		NOTIFICATION_WM_MOUSE_ENTER:
+#			if maus_sichtbar == false:
+#				Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+#			print("Maus im Fenster")
+			
