@@ -79,16 +79,11 @@ func _physics_process(delta):
 	rotate(drehung)
 	var velocity = Vector2(Global.geschwindigkeit * 20,0)
 	velocity = velocity.rotated(rotation)
-	var konflikt = move_and_collide(velocity * delta)
-	if konflikt:
-		kollision(konflikt)
-
-func kollision(obj:KinematicCollision2D):
-	drehung = z_ruder.rotation / -100
-	rotate(drehung)
-	if Global.geschwindigkeit > 2:
-		schaden += Global.geschwindigkeit
-		print(schaden)
-		var objekt = obj.collider
-		#print(objekt.name)
-	Global.geschwindigkeit = 0
+	velocity = move_and_slide(velocity)
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		#print("Collided with: ", collision.collider.name)
+		if Global.geschwindigkeit > 2:
+			schaden += Global.geschwindigkeit
+			print(schaden)
+		Global.geschwindigkeit = 0
