@@ -8,8 +8,10 @@ var z_sb_seil:VScrollBar
 var z_sb_segel:VScrollBar
 var z_Kamera:Camera2D
 var z_hud:Control
-var z_boot: KinematicBody2D
 var z_cam: Camera2D
+#var z_boot_shape:Shape2D
+#var z_boot_coll:CollisionShape2D
+
 
 var zoom:int = 1
 var windrichtung:float
@@ -20,6 +22,8 @@ var proz_seil:float
 var proz_ruder:float
 var proz_segel:float
 var aktiv_id:int = 0
+var im_hafen:bool = false
+
 
 func _ready():
 	z_windrichtung = get_node("Camera2D/HUD/Sp_Windrichtung")
@@ -28,13 +32,15 @@ func _ready():
 	z_sb_segel = get_node("Camera2D/HUD/VSBSegel")
 	z_Kamera = get_node("Camera2D")
 	z_hud = get_node("Camera2D/HUD")
-	z_boot = get_node("Boot/KinematicBody2D")
+	#z_boot_shape = get_node("Boot/KinematicBody2D/CollisionPolygon2D").get_shape()
+	#z_boot_coll = get_node("Boot/KinematicBody2D/CollisionPolygon2D")
+	Global.z_boot = get_node("Boot/KinematicBody2D")
 	proz_seil = (z_sb_seil.max_value - z_sb_seil.min_value) / 100
 	proz_ruder = (z_sb_ruder.max_value - z_sb_ruder.min_value) / 100
 	proz_segel = (z_sb_segel.max_value - z_sb_segel.min_value) / 100
 	
 func _process(delta):
-	z_Kamera.global_position = z_boot.global_position
+	z_Kamera.global_position = Global.z_boot.global_position
 
 func set_windrichtung():
 	if windrichtung > PI:
@@ -115,3 +121,4 @@ func _input(event):
 			z_sb_ruder.value = z_sb_ruder.min_value + (x / proz_fenster.x) * proz_ruder
 		if aktiv_id == 2:
 			z_sb_segel.value = z_sb_segel.min_value + (y / proz_fenster.y) * proz_segel
+

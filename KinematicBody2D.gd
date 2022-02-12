@@ -62,8 +62,11 @@ func _physics_process(delta):
 	# Kraft auf Segel 0 - 10
 	# Windrichtung im 90° zur Segelfläche = 100%
 	Global.kraft_auf_segel = abs(sin(rotation + z_mast.rotation - Global.windrichtung)) * Global.windstaerke
+	
 	# Kraft auf Segel im 90° zur Fahrtrichtung = 100%
-	Global.kraft_in_fahrtrichtung = Global.kraft_auf_segel * abs(sin(z_mast.rotation)) * segel
+	Global.kraft_in_fahrtrichtung = Global.kraft_auf_segel * abs(sin(z_mast.rotation))# * segel
+	Global.kraft_in_fahrtrichtung += (Global.kraft_auf_segel - Global.kraft_in_fahrtrichtung) / 10
+	Global.kraft_in_fahrtrichtung *= segel
 	if Global.kraft_in_fahrtrichtung > Global.geschwindigkeit:
 		div = Global.kraft_in_fahrtrichtung - Global.geschwindigkeit
 		Global.geschwindigkeit += div / 200

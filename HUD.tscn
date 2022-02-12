@@ -1,13 +1,26 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://bilder/pfeil.png" type="Texture" id=1]
 [ext_resource path="res://HUD.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="Theme" id=3]
+ProgressBar/colors/font_color = Color( 1, 1, 1, 1 )
+ProgressBar/colors/font_color_shadow = Color( 1, 1, 1, 1 )
+ProgressBar/fonts/font = null
+ProgressBar/styles/bg = SubResource( 1 )
+ProgressBar/styles/fg = SubResource( 2 )
 
 [node name="HUD" type="Control"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+theme = SubResource( 3 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
