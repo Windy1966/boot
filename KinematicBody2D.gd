@@ -43,9 +43,7 @@ func _physics_process(delta):
 	if abs(differenz) < seil:								# Wind von vorne Segel gleich Wind
 		z_mast.rotate((differenz *-1) - z_mast.rotation)
 		# Wenn keine Kraft in Fahrtrichtung
-		######################################
 
-		######################################
 	elif differenz > seil and differenz < (PI-seil):		# Wind links und Segel im Wind
 		z_mast.rotation = seil *-1
 		segel_drehung_uhrz = false
@@ -62,20 +60,22 @@ func _physics_process(delta):
 	# Kraft auf Segel 0 - 10
 	# Windrichtung im 90° zur Segelfläche = 100%
 	Global.kraft_auf_segel = abs(sin(rotation + z_mast.rotation - Global.windrichtung)) * Global.windstaerke
-	
 	# Kraft auf Segel im 90° zur Fahrtrichtung = 100%
-	Global.kraft_in_fahrtrichtung = Global.kraft_auf_segel * abs(sin(z_mast.rotation))# * segel
+	# um ständig etwas vortrieb zu haben addiere ich die hälfte von Segel hinzu
+	Global.kraft_in_fahrtrichtung = Global.kraft_auf_segel * abs(sin(z_mast.rotation)) + (segel/2)
 	Global.kraft_in_fahrtrichtung += (Global.kraft_auf_segel - Global.kraft_in_fahrtrichtung) / 10
 	Global.kraft_in_fahrtrichtung *= segel
+	# Zeitlicher An/Abstieg der Geschwindigkeit
 	if Global.kraft_in_fahrtrichtung > Global.geschwindigkeit:
 		div = Global.kraft_in_fahrtrichtung - Global.geschwindigkeit
 		Global.geschwindigkeit += div / 200
 	if Global.kraft_in_fahrtrichtung < Global.geschwindigkeit:
 		div = Global.geschwindigkeit - Global.kraft_in_fahrtrichtung
 		Global.geschwindigkeit -= div / 500
+	# 
 	if Global.geschwindigkeit < 0.5:
 		$Icon.visible = true
-		drehung = z_ruder.rotation / -400
+		drehung = z_ruder.rotation / -800
 	else:
 		$Icon.visible = false
 		drehung = z_ruder.rotation * -Global.geschwindigkeit / 1000
@@ -85,8 +85,7 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity)
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
-		#print("Collided with: ", collision.collider.name)
 		if Global.geschwindigkeit > 2:
 			schaden += Global.geschwindigkeit
 			print(schaden)
-		Global.geschwindigkeit = 0
+			Global.geschwindigkeit = 0

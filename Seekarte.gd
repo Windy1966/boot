@@ -9,9 +9,6 @@ var z_sb_segel:VScrollBar
 var z_Kamera:Camera2D
 var z_hud:Control
 var z_cam: Camera2D
-#var z_boot_shape:Shape2D
-#var z_boot_coll:CollisionShape2D
-
 
 var zoom:int = 1
 var windrichtung:float
@@ -24,7 +21,6 @@ var proz_segel:float
 var aktiv_id:int = 0
 var im_hafen:bool = false
 
-
 func _ready():
 	z_windrichtung = get_node("Camera2D/HUD/Sp_Windrichtung")
 	z_sb_ruder = get_node("Camera2D/HUD/HSBRuder")
@@ -32,8 +28,6 @@ func _ready():
 	z_sb_segel = get_node("Camera2D/HUD/VSBSegel")
 	z_Kamera = get_node("Camera2D")
 	z_hud = get_node("Camera2D/HUD")
-	#z_boot_shape = get_node("Boot/KinematicBody2D/CollisionPolygon2D").get_shape()
-	#z_boot_coll = get_node("Boot/KinematicBody2D/CollisionPolygon2D")
 	Global.z_boot = get_node("Boot/KinematicBody2D")
 	proz_seil = (z_sb_seil.max_value - z_sb_seil.min_value) / 100
 	proz_ruder = (z_sb_ruder.max_value - z_sb_ruder.min_value) / 100
@@ -86,13 +80,11 @@ func _input(event):
 	if event.is_action("links"):
 		z_sb_ruder.value -= 0.05
 	if event.is_action_pressed("oben"):
-		pass
-		#print("Aktion oben")
+		z_sb_seil.value -= 1
 	if event.is_action("rechts"):
 		z_sb_ruder.value += 0.05
 	if event.is_action_pressed("unten"):
-		pass
-		#print("Aktion unten")
+		z_sb_seil.value += 1
 	if event.is_action_pressed("steuerung_a"):
 		steuerung_aktiv(1)
 	if event.is_action_released("steuerung_a"):
@@ -104,12 +96,12 @@ func _input(event):
 	if event is InputEventMouse:
 		if event.button_mask == 8:
 			zoom += 1
-			zoom = clamp(zoom, 2, 15)
+			zoom = clamp(zoom, 1, 15)
 			z_Kamera.set_zoom(Vector2(zoom,zoom))
 			z_hud.set_scale(Vector2(zoom,zoom))
 		if event.button_mask == 16:
 			zoom -= 1
-			zoom = clamp(zoom, 2, 15)
+			zoom = clamp(zoom, 1, 15)
 			z_Kamera.set_zoom(Vector2(zoom,zoom))
 			z_hud.set_scale(Vector2(zoom,zoom))
 	if event is InputEventMouseMotion and maus_sichtbar == false:

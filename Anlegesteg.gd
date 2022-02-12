@@ -12,9 +12,6 @@ func _ready():
 func _physics_process(delta):
 	if hafen_schalter:
 		_insgesamt_im_hafen()
-	if Input.is_key_pressed(KEY_A):
-		for dummi in Global.z_boot.get_child_count():
-			print(Global.z_boot.get_child (dummi))
 
 func _on_Anlegebereich_body_entered(body):
 	hafen_schalter = true
