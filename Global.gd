@@ -9,3 +9,4 @@ var windstaerke:int = 10
 var kraft_auf_segel:float = 0
 var kraft_in_fahrtrichtung:float = 0
 var geschwindigkeit:float = 0
+var z_boot:Node2D
