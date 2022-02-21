@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://welt/hafen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://welt/Anlegesteg.tscn" type="PackedScene" id=1]
 [ext_resource path="res://welt/insel8.tscn" type="PackedScene" id=3]
 [ext_resource path="res://welt/insel4.tscn" type="PackedScene" id=4]
 [ext_resource path="res://welt/insel1.tscn" type="PackedScene" id=5]
@@ -38,17 +38,17 @@ position = Vector2( -9571, -1516 )
 [node name="Insel8" parent="inselgruppe" instance=ExtResource( 3 )]
 position = Vector2( -6381, 7263 )
 
-[node name="Hafen" parent="inselgruppe" instance=ExtResource( 1 )]
-position = Vector2( -3166, 3602 )
+[node name="Anlegesteg" parent="." instance=ExtResource( 1 )]
+position = Vector2( -3411, 3657 )
 
-[node name="Hafen4" parent="inselgruppe" instance=ExtResource( 1 )]
-position = Vector2( -7912, -3910 )
-rotation = 1.07241
+[node name="Anlegesteg2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1580, -1909 )
+rotation = 0.870956
 
-[node name="Hafen2" parent="inselgruppe" instance=ExtResource( 1 )]
-position = Vector2( 2962, -1077 )
-rotation = 0.626739
+[node name="Anlegesteg3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 629, -8834 )
+rotation = -2.39332
 
-[node name="Hafen3" parent="inselgruppe" instance=ExtResource( 1 )]
-position = Vector2( 452, -8999 )
-rotation = 3.45804
+[node name="Anlegesteg4" parent="." instance=ExtResource( 1 )]
+position = Vector2( -8031, -3971 )
+rotation = 0.818608
