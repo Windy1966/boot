@@ -11,6 +11,8 @@ var vorbelegung = {
 	"test_wind_minus" : KEY_O
 	}
 
+var seekarte
+
 func _ready():
 	initKeymap(vorbelegung)
 	#OS.window_fullscreen = true
@@ -24,3 +26,8 @@ func initKeymap(keymap:Dictionary):
 		var ev = InputEventKey.new()
 		ev.scancode = keymap[action]    
 		InputMap.action_add_event(action, ev) 
+
+
+func _on_Button_pressed():
+	Global.wechsel_szene()
+

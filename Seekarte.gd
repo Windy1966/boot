@@ -35,6 +35,7 @@ func _ready():
 	
 func _process(delta):
 	z_Kamera.global_position = Global.z_boot.global_position
+	pass
 
 func set_windrichtung():
 	if windrichtung > PI:

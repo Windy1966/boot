@@ -16,7 +16,7 @@ texture_scale = Vector2( 0.25, 0.25 )
 polygon = PoolVector2Array( 10460, 19759, -18059, 19651, -18131, -7396, 10820, -7647 )
 
 [node name="Boot" parent="." instance=ExtResource( 2 )]
-position = Vector2( -2000, 547 )
+position = Vector2( -2031, 520 )
 
 [node name="Inseln" parent="." instance=ExtResource( 3 )]
 position = Vector2( -1697, 5544 )
