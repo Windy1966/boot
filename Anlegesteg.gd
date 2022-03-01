@@ -14,6 +14,7 @@ func _physics_process(delta):
 		_insgesamt_im_hafen()
 
 func _on_Anlegebereich_body_entered(body):
+	
 	hafen_schalter = true
 
 func _on_Anlegebereich_body_exited(body):
@@ -27,5 +28,10 @@ func _insgesamt_im_hafen():
 		if not Geometry.is_point_in_polygon(point, hafen_punkte):
 			boot_im_feld = false
 			break
-	if boot_im_feld:
-		print("Im Hafenbereich")
+	if hafen_schalter and boot_im_feld and Global.geschwindigkeit < 0.8:
+		Global.in_fahrt = false
+		#Global.geschwindigkeit = 0
+		print("Angelegt")
+	if Input.is_key_pressed(KEY_Y):
+		Global.in_fahrt = true
+		print("Abgelegt")
