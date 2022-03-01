@@ -32,7 +32,7 @@ polygon = PoolVector2Array( 204, 63, 211, -475, -154, -474, -155, -579, 386, -57
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Anlegebereich"]
 position = Vector2( 0, 15 )
-polygon = PoolVector2Array( -255, -363, 285, -362, 285, -615, -253, -616 )
+polygon = PoolVector2Array( -357, -364, 386, -362, 386, -619, -356, -620 )
 
 [connection signal="body_entered" from="Anlegebereich" to="." method="_on_Anlegebereich_body_entered"]
 [connection signal="body_exited" from="Anlegebereich" to="." method="_on_Anlegebereich_body_exited"]

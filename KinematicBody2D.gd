@@ -59,12 +59,12 @@ func _physics_process(delta):
 			segel_drehung_uhrz = false
 	# Kraft auf Segel 0 - 10
 	# Windrichtung im 90° zur Segelfläche = 100%
-	Global.kraft_auf_segel = abs(sin(rotation + z_mast.rotation - Global.windrichtung)) * Global.windstaerke
+	Global.kraft_auf_segel = abs(sin(rotation + z_mast.rotation - Global.windrichtung)) * Global.windstaerke * segel
 	# Kraft auf Segel im 90° zur Fahrtrichtung = 100%
 	# um ständig etwas vortrieb zu haben addiere ich die hälfte von Segel hinzu
 	Global.kraft_in_fahrtrichtung = Global.kraft_auf_segel * abs(sin(z_mast.rotation)) + (segel/2)
 	Global.kraft_in_fahrtrichtung += (Global.kraft_auf_segel - Global.kraft_in_fahrtrichtung) / 10
-	Global.kraft_in_fahrtrichtung *= segel
+	#Global.kraft_in_fahrtrichtung *= segel
 	# Zeitlicher An/Abstieg der Geschwindigkeit
 	if Global.kraft_in_fahrtrichtung > Global.geschwindigkeit:
 		div = Global.kraft_in_fahrtrichtung - Global.geschwindigkeit
@@ -73,19 +73,20 @@ func _physics_process(delta):
 		div = Global.geschwindigkeit - Global.kraft_in_fahrtrichtung
 		Global.geschwindigkeit -= div / 500
 	# 
-	if Global.geschwindigkeit < 0.5:
-		$Icon.visible = true
-		drehung = z_ruder.rotation / -800
-	else:
-		$Icon.visible = false
+#	if Global.geschwindigkeit < 0.5:
+#		$Icon.visible = true
+#		drehung = z_ruder.rotation / -800
+#	else:
+#		$Icon.visible = false
+	if Global.in_fahrt:
 		drehung = z_ruder.rotation * -Global.geschwindigkeit / 1000
-	rotate(drehung)
-	var velocity = Vector2(Global.geschwindigkeit * 20,0)
-	velocity = velocity.rotated(rotation)
-	velocity = move_and_slide(velocity)
-	for i in get_slide_count():
-		var collision = get_slide_collision(i)
-		if Global.geschwindigkeit > 2:
-			schaden += Global.geschwindigkeit
-			print(schaden)
-			Global.geschwindigkeit = 0
+		rotate(drehung)
+		var velocity = Vector2(Global.geschwindigkeit * 20,0)
+		velocity = velocity.rotated(rotation)
+		velocity = move_and_slide(velocity)
+		for i in get_slide_count():
+			var collision = get_slide_collision(i)
+			if Global.geschwindigkeit > 2:
+				schaden += Global.geschwindigkeit
+				print(schaden)
+				#Global.geschwindigkeit = 0
