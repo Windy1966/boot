@@ -10,20 +10,21 @@
 script = ExtResource( 4 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( 15119, 7096 )
 z_index = -2
 texture = ExtResource( 5 )
 texture_scale = Vector2( 0.25, 0.25 )
-polygon = PoolVector2Array( 10460, 19759, -18059, 19651, -18131, -7396, 10820, -7647 )
+polygon = PoolVector2Array( 10595, 18989, -15036, 18989, -15104, -7058, 10662, -7058 )
 
 [node name="Boot" parent="." instance=ExtResource( 2 )]
-position = Vector2( -2031, 520 )
+position = Vector2( 13119, 7643 )
 
 [node name="Inseln" parent="." instance=ExtResource( 3 )]
-position = Vector2( -1697, 5544 )
+position = Vector2( 13422, 12640 )
 z_index = -1
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( -2000, 544 )
+position = Vector2( 13119, 7640 )
 current = true
 
 [node name="HUD" parent="Camera2D" instance=ExtResource( 1 )]
