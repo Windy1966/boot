@@ -43,6 +43,7 @@ func _physics_process(delta):
 	if abs(differenz) < seil:								# Wind von vorne Segel gleich Wind
 		z_mast.rotate((differenz *-1) - z_mast.rotation)
 		# Wenn keine Kraft in Fahrtrichtung
+
 	elif differenz > seil and differenz < (PI-seil):		# Wind links und Segel im Wind
 		z_mast.rotation = seil *-1
 		segel_drehung_uhrz = false

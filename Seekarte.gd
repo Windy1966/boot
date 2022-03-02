@@ -35,7 +35,30 @@ func _ready():
 	
 func _process(delta):
 	z_Kamera.global_position = Global.z_boot.global_position
-	pass
+	if Input.is_action_pressed("test_wind_plus"):
+		windrichtung = z_windrichtung.rotation + EinGrad
+		set_windrichtung()
+	if Input.is_action_pressed("test_wind_minus"):
+		windrichtung = z_windrichtung.rotation - EinGrad
+		set_windrichtung()
+	if Input.is_action_pressed("links"):
+		z_sb_ruder.value -= 0.01
+	if Input.is_action_pressed("oben"):
+		z_sb_seil.value -= 0.1
+	if Input.is_action_pressed("rechts"):
+		z_sb_ruder.value += 0.01
+	if Input.is_action_pressed("unten"):
+		z_sb_seil.value += 0.1
+	# Steuerung mit Maus aktivieren mit Q und E
+	if Input.is_action_just_pressed("steuerung_a"):
+		steuerung_aktiv(1)
+	if Input.is_action_just_released("steuerung_a"):
+		steuerung_deaktiv(1)
+	if Input.is_action_just_pressed("steuerung_b"):
+		steuerung_aktiv(2)
+	if Input.is_action_just_released("steuerung_b"):
+		steuerung_deaktiv(2)
+
 
 func set_windrichtung():
 	if windrichtung > PI:
@@ -72,28 +95,6 @@ func steuerung_deaktiv(id:int):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _input(event):
-	if event.is_action("test_wind_plus"):
-		windrichtung = z_windrichtung.rotation + EinGrad
-		set_windrichtung()
-	if event.is_action("test_wind_minus"):
-		windrichtung = z_windrichtung.rotation - EinGrad
-		set_windrichtung()
-	if event.is_action("links"):
-		z_sb_ruder.value -= 0.05
-	if event.is_action_pressed("oben"):
-		z_sb_seil.value -= 1
-	if event.is_action("rechts"):
-		z_sb_ruder.value += 0.05
-	if event.is_action_pressed("unten"):
-		z_sb_seil.value += 1
-	if event.is_action_pressed("steuerung_a"):
-		steuerung_aktiv(1)
-	if event.is_action_released("steuerung_a"):
-		steuerung_deaktiv(1)
-	if event.is_action_pressed("steuerung_b"):
-		steuerung_aktiv(2)
-	if event.is_action_released("steuerung_b"):
-		steuerung_deaktiv(2)
 	if event is InputEventMouse:
 		if event.button_mask == 8:
 			zoom += 1

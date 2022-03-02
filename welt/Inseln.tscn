@@ -40,15 +40,19 @@ position = Vector2( -6381, 7263 )
 
 [node name="Anlegesteg" parent="." instance=ExtResource( 1 )]
 position = Vector2( -3411, 3657 )
+hafen_id = 8
 
 [node name="Anlegesteg2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1580, -1909 )
 rotation = 0.870956
+hafen_id = 1
 
 [node name="Anlegesteg3" parent="." instance=ExtResource( 1 )]
 position = Vector2( 629, -8834 )
 rotation = -2.39332
+hafen_id = 5
 
 [node name="Anlegesteg4" parent="." instance=ExtResource( 1 )]
 position = Vector2( -8031, -3971 )
 rotation = 0.818608
+hafen_id = 3

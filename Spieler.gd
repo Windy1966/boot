@@ -4,26 +4,25 @@ extends Node2D
 var richtung:Vector2 = Vector2(0,0)
 var zoom:int = 1
 var z_kamera:Camera2D
+var a=0
 
 func _ready():
 	z_kamera = get_node("../Camera2D")
 	pass # Replace with function body.
 
 
-#func _process(delta):
+func _process(delta):
+	if Input.is_action_pressed("links"):
+		richtung.x = -1
+	if Input.is_action_pressed("oben"):
+		richtung.y = -1
+	if Input.is_action_pressed("rechts"):
+		richtung.x = 1
+	if Input.is_action_pressed("unten"):
+			richtung.y = 1
 #	pass
 
 func _input(event):
-	if event is InputEventKey:
-		
-		if event.is_action("links"):
-			richtung.x = -1
-		if event.is_action("oben"):
-			richtung.y = -1
-		if event.is_action("rechts"):
-			richtung.x = 1
-		if event.is_action("unten"):
-			richtung.y = 1
 	if event is InputEventMouse:
 		if event.button_mask == 8:
 			zoom += 1

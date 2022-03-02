@@ -4,6 +4,7 @@ var boot_coll
 var hafen_coll
 var hafen_punkte
 var hafen_schalter:bool=false
+export var hafen_id:int
 
 func _ready():
 	hafen_coll = get_node("Anlegebereich/CollisionPolygon2D")
@@ -14,7 +15,6 @@ func _physics_process(delta):
 		_insgesamt_im_hafen()
 
 func _on_Anlegebereich_body_entered(body):
-	
 	hafen_schalter = true
 
 func _on_Anlegebereich_body_exited(body):
@@ -31,7 +31,11 @@ func _insgesamt_im_hafen():
 	if hafen_schalter and boot_im_feld and Global.geschwindigkeit < 0.8:
 		Global.in_fahrt = false
 		#Global.geschwindigkeit = 0
-		print("Angelegt")
+		anlegen()
 	if Input.is_key_pressed(KEY_Y):
 		Global.in_fahrt = true
 		print("Abgelegt")
+
+func anlegen():
+	Global.auf_insel = hafen_id
+	Global.wechsel_szene()
