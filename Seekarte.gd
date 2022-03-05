@@ -20,6 +20,7 @@ var proz_ruder:float
 var proz_segel:float
 var aktiv_id:int = 0
 var im_hafen:bool = false
+var myWind: PosMap = PosMap.new()
 
 func _ready():
 	z_windrichtung = get_node("Camera2D/HUD/Sp_Windrichtung")
@@ -32,6 +33,7 @@ func _ready():
 	proz_seil = (z_sb_seil.max_value - z_sb_seil.min_value) / 100
 	proz_ruder = (z_sb_ruder.max_value - z_sb_ruder.min_value) / 100
 	proz_segel = (z_sb_segel.max_value - z_sb_segel.min_value) / 100
+	myWind.load("res://pos12.posm")
 	
 func _process(delta):
 	z_Kamera.global_position = Global.z_boot.global_position
@@ -41,6 +43,8 @@ func _process(delta):
 	if Input.is_action_pressed("test_wind_minus"):
 		windrichtung = z_windrichtung.rotation - EinGrad
 		set_windrichtung()
+	ermittel_windrichtung()
+	# Steuerung mit W,A,S,D
 	if Input.is_action_pressed("links"):
 		z_sb_ruder.value -= 0.01
 	if Input.is_action_pressed("oben"):
@@ -59,7 +63,6 @@ func _process(delta):
 	if Input.is_action_just_released("steuerung_b"):
 		steuerung_deaktiv(2)
 
-
 func set_windrichtung():
 	if windrichtung > PI:
 		windrichtung = windrichtung - PI*2
@@ -67,6 +70,12 @@ func set_windrichtung():
 		windrichtung = windrichtung + PI*2
 	z_windrichtung.global_rotation = windrichtung
 	Global.windrichtung = windrichtung
+
+func ermittel_windrichtung():
+	var gridSize: float = 25000 / 12
+	var wind_rotation = myWind.get_value(Global.z_boot.global_position.x / gridSize, Global.z_boot.global_position.y / gridSize)
+	z_windrichtung.global_rotation = wind_rotation
+	Global.windrichtung = wind_rotation
 
 func steuerung_aktiv(id:int):
 	if aktiv_id == 0:
